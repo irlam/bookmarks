@@ -1,0 +1,11 @@
+# Deny direct HTTP access to PHP helpers (they are used via include only)
+<FilesMatch "^(config|auth)\.php$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Protect the data directory
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^data/ - [F,L]
+</IfModule>
